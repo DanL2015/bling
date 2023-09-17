@@ -116,6 +116,8 @@ local function draw_widget(
                                         and "fit"
                                     or "auto",
                                 id = "thumbnail",
+                                halign = "center",
+                                valign = "center",
                                 widget = wibox.widget.imagebox,
                             },
                             margins = thumbnail_margins,
