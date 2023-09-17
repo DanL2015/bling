@@ -23,6 +23,7 @@ local app_launcher  = { mt = {} }
 local terminal_commands_lookup =
 {
     alacritty = "alacritty -e",
+    kitty = "kitty -e",
     termite = "termite -e",
     rxvt = "rxvt -e",
     terminator = "terminator -e"
@@ -171,7 +172,7 @@ local function create_app_widget(self, entry)
                 expand = "outside",
                 nil,
                 {
-                    layout = wibox.layout.fixed.vertical,
+                    layout = wibox.layout.fixed.horizontal,
                     spacing = self.app_content_spacing,
                     icon,
                     {
@@ -282,7 +283,7 @@ local function search(self, text)
 
             -- Check if there's a match by the app name or app command
             if string.find(entry.name:lower(), text:lower(), 1, true) ~= nil or
-                self.search_commands and string.find(entry.commandline, text:lower(), 1, true) ~= nil
+                self.search_commands and (entry.commandline and string.find(entry.commandline, text:lower(), 1, true) ~= nil)
             then
                 table.insert(self._private.matched_entries, {
                     name = entry.name,
